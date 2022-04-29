@@ -499,6 +499,11 @@ a:focus {
   color: #ffffff;
 }
 
+.veg_section select {
+  display: block;
+  margin: 0 auto;
+}
+
 .about_section {
   padding: 145px 0;
   position: relative;

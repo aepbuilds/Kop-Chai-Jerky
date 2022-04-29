@@ -221,9 +221,20 @@ $products = $stmt->fetchAll();
                   <i class="fa fa-star" aria-hidden="true"></i>
                 </div>
                 <div class="price_box">
-                  <h6 class="price_heading"><?php print $product['price']?></h6>
+                  <h6 class="price_heading">$<?php print $product['price']?></h6>
                 </div>
                 <div class="purchase-buttons">
+
+            <form method="post" action="index.php?action=addcart">
+                <select name="qty">
+                  <option value="0">0</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                </select>
+                <button type="submit" class="btn btn-warning">Add To Cart</button>
+                <input type="hidden" name="sku" value="<?php print $product['sku']?>">
+            </form>
 
             <form action = "https://www.sandbox.paypal.com/us/cgi-bin/webscr" method = "post" target = "paypal">
               <input type = "hidden" name = "cmd" value = "_ext-enter" />
@@ -236,8 +247,6 @@ $products = $stmt->fetchAll();
               <button type="submit" class="btn btn-warning">Buy Now</button>
             </form>
 
-                  <button>Add to Cart</button>
-                  <input type="hidden" name="sku" value="<?php print $product['sku']?>">
                 </div>
               </div>
             </div>

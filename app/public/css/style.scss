@@ -433,7 +433,14 @@ a:focus {
       @include hero_btn($primary1, $white, 10px, 45px, 5px);
     }
   }
+
+  select {
+    display: block;
+    margin: 0 auto;
+  }
 }
+
+
 
 // end Purchase section
 
