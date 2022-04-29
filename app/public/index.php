@@ -1,3 +1,86 @@
+<?php 
+error_reporting(E_ALL);
+
+session_start();
+$sessid = session_id();
+$total=0;
+
+//Database connection, replace with your connection string.. Used PDO
+$dbh = new PDO("mysql:host=localhost;dbname=kopchaijerky", "root", "root");
+$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+//get action string
+$action = isset($_GET['action'])?$_GET['action']:"";
+
+//Add to cart
+if($action=='addcart' && $_SERVER['REQUEST_METHOD']=='POST') {
+	
+  $qty = $_POST['qty'];
+
+	//Finding the product by code
+	$query = "SELECT * FROM products WHERE sku=:sku";
+	$stmt = $dbh->prepare($query);
+	$stmt->bindParam('sku', $_POST['sku']);
+	$stmt->execute();
+	$product = $stmt->fetch();
+
+  $productid = $product['product_id'];
+
+
+  //check the cartitem table to see if sku is in there
+  $chkquery = "SELECT * FROM cartitems WHERE productid = '$productid' and sessionid = '$sessid'";
+  $chkstmt = $dbh->prepare($chkquery);
+  $chkstmt->execute();
+  $productincart = $chkstmt->fetch();
+  $id = $productincart['id'];
+  if (!empty($id)){
+    $upstmt = $dbh->prepare("update cartitems set qty = '$qty' where productid = '$productid' and sessionid = '$sessid'");
+    $upstmt->execute();
+  }
+  else {
+    $instmt = $dbh->prepare("insert into cartitems (productid,sessionid,timeofentry,qty) values ('$productid','$sessid',now(),'$qty')");
+    $instmt->execute();
+
+  }
+  //if it is, we'll write an update statement
+
+
+  //else write an insert statement
+
+	
+	$currentQty = $_POST['qty']; //Incrementing the product qty in cart
+	$_SESSION['products'][$_POST['sku']] =array('qty'=>$currentQty,'name'=>$product['name'],'image'=>$product['image'],'price'=>$product['price']);
+	$product='';
+	header("Location:index.php");
+}
+
+//Empty All
+if($action=='emptyall') {
+	$_SESSION['products'] =array();
+	header("Location:index.php");	
+}
+
+//Empty one by one
+if($action=='empty') {
+	$sku = $_GET['sku'];
+	$products = $_SESSION['products'];
+	unset($products[$sku]);
+	$_SESSION['products']= $products;
+	header("Location:index.php");	
+}
+
+
+ 
+ 
+ //Get all Products
+$query = "SELECT * FROM products";
+$stmt = $dbh->prepare($query);
+$stmt->execute();
+$products = $stmt->fetchAll();
+
+
+?>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -41,10 +124,10 @@
         <div class="mr-auto flex-column flex-lg-row me-auto">
           <ul class="navbar-nav User_option">
             <li class="">
-              <a class="" href="#"> About </a>
+              <a class="" href="#about"> About </a>
             </li>
             <li class="">
-              <a class="" href=""> Contact </a>
+              <a class="" href="#contact"> Contact </a>
             </li>
           </ul>
         </div>
@@ -84,7 +167,18 @@
                             Spicy Bomb is sure not to disappoint!
                           </p>
                         </div>
-                        <button>Buy Now</button>
+                        
+                        <form action = "https://www.sandbox.paypal.com/us/cgi-bin/webscr" method = "post" target = "paypal">
+                          <input type = "hidden" name = "cmd" value = "_ext-enter" />
+                          <input type = "hidden" name = "redirect_cmd" value = "_xclick" /> 
+                          <input type = "hidden" name = "return" value = "https://kopchaijerky.com/" /> 
+                          <input type = "hidden" name = "business" value = "aphomthavong@business.example.com" /> 
+                          <input type = "hidden" name = "item_name" value = "Spicy Bomb" />
+                          <input type = "hidden" name = "amount" value = "10.00" />
+                          <input type = "hidden" name = "item_number" value = "2" />
+                          <button type="submit" class="btn btn-warning">Buy Now</button>
+                        </form>
+
                       </div>
                     </div>
                   </div>
@@ -111,13 +205,14 @@
           <h2>Currently On Sale</h2>
         </div>
         <div class="row">
+          <?php foreach($products as $product): ?>
           <div class="col-md-6 col-lg-3">
             <div class="box">
               <div class="img-box">
-                <img src="images/spicy_bomb_cut_2.png" alt="Spicy Bomb" />
+                <img src="<?php print $product['image']?>" alt="<?php print $product['name']?>" />
               </div>
               <div class="detail-box">
-                <h3>Spicy Bomb</h3>
+                <h3><?php print $product['name']?></h3>
                 <div class="box-rating">
                   <i class="fa fa-star" aria-hidden="true"></i>
                   <i class="fa fa-star" aria-hidden="true"></i>
@@ -126,87 +221,28 @@
                   <i class="fa fa-star" aria-hidden="true"></i>
                 </div>
                 <div class="price_box">
-                  <h6 class="price_heading">$10.00</h6>
+                  <h6 class="price_heading"><?php print $product['price']?></h6>
                 </div>
                 <div class="purchase-buttons">
-                  <button>Buy Now</button>
+
+            <form action = "https://www.sandbox.paypal.com/us/cgi-bin/webscr" method = "post" target = "paypal">
+              <input type = "hidden" name = "cmd" value = "_ext-enter" />
+              <input type = "hidden" name = "redirect_cmd" value = "_xclick" /> 
+              <input type = "hidden" name = "return" value = "https://kopchaijerky.com/" /> 
+              <input type = "hidden" name = "business" value = "aphomthavong@business.example.com" /> 
+              <input type = "hidden" name = "item_name" value = "<?php print $product['name'];?>" />
+              <input type = "hidden" name = "amount" value = "<?php print $product['price'];?>" />
+              <input type = "hidden" name = "item_number" value = "<?php print $product['product_id'];?>" />
+              <button type="submit" class="btn btn-warning">Buy Now</button>
+            </form>
+
                   <button>Add to Cart</button>
+                  <input type="hidden" name="sku" value="<?php print $product['sku']?>">
                 </div>
               </div>
             </div>
           </div>
-          <div class="col-md-6 col-lg-3">
-            <div class="box">
-              <div class="img-box">
-                <img src="images/black_bomb_cut.png" alt="Black Bomb" />
-              </div>
-              <div class="detail-box">
-                <h3>Black Bomb</h3>
-                <div class="box-rating">
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                </div>
-                <div class="price_box">
-                  <h6 class="price_heading">$10.00</h6>
-                </div>
-                <div class="purchase-buttons">
-                  <button>Buy Now</button>
-                  <button>Add to Cart</button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-3">
-            <div class="box">
-              <div class="img-box">
-                <img src="images/weaksauce_cut_3.png" alt="Weaksauce" />
-              </div>
-              <div class="detail-box">
-                <h3>Weaksauce</h3>
-                <div class="box-rating">
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                </div>
-                <div class="price_box">
-                  <h6 class="price_heading">$10.00</h6>
-                </div>
-                <div class="purchase-buttons">
-                  <button>Buy Now</button>
-                  <button>Add to Cart</button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-3">
-            <div class="box">
-              <div class="img-box">
-                <img src="images/sweet_sesame.png" alt="Sweet Sesame" />
-              </div>
-              <div class="detail-box">
-                <h3>Sweet Sesame</h3>
-                <div class="box-rating">
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                </div>
-                <div class="price_box">
-                  <h6 class="price_heading">$10.00</h6>
-                </div>
-                <div class="purchase-buttons">
-                  <button>Buy Now</button>
-                  <button>Add to Cart</button>
-                </div>
-              </div>
-            </div>
-          </div>
+          <?php endforeach; ?>
         </div>
       </div>
     </section>
