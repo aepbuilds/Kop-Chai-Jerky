@@ -1,3 +1,25 @@
+<?php
+error_reporting(E_ALL);
+//Setting session start
+session_start();
+$sessid = session_id();
+var_dump($_SESSION);
+
+$numcart = count($_SESSION['products']);
+
+//Database connection, replace with your connection string.. Used PDO
+$dbh = new PDO("mysql:host=localhost;dbname=kopchaijerky", "root", "root");
+$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+//write a qry to get all the data we need. (name,itemnumber,price)
+
+$getcart = $dbh->prepare("select products.name, products.product_id, products.price, cartitems.qty
+from products, cartitems
+where cartitems.productid = products.product_id and cartitems.sessionid = '$sessid'");
+
+$getcart->execute();
+
+
+?>
 
 <!doctype html>
 <html lang="en">
@@ -18,10 +40,15 @@
       crossorigin="anonymous"
     />
 
+    <!-- font awesome style -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+      rel="stylesheet"
+    />
+    <!-- Custom styles for this template -->
+    <link href="css/style.css" rel="stylesheet" />
+
     <style>
-        .container {
-            ax-width: 960px;
-        }
         .border-top { 
             border-top: 1px solid #e5e5e5; 
         }
@@ -44,77 +71,82 @@
 
   <body class="bg-light">
 
-    <div class="container">
+    <div class="container checkout-form">
       <div class="py-5 text-center">
-        <img class="d-block mx-auto mb-4" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+        <img class="d-block mx-auto mb-4" src="images/logo.png" alt="Kop Chai Jerky" width="150" height="150">
         <h2>Checkout form</h2>
-        <p class="lead">Below is an example form built entirely with Bootstrap's form controls. Each required form group has a validation state that can be triggered by attempting to submit the form without completing it.</p>
       </div>
 
       <div class="row">
         <div class="col-md-4 order-md-2 mb-4">
+
+        <form action="https://www.sandbox.paypal.com/us/cgi-bin/webscr" method="post" name="_xclick" class="needs-validation" novalidate>
+
+          <input type = "hidden" name = "cmd" value = "_ext-enter" />
+          <input type = "hidden" name = "redirect_cmd" value = "_xclick" /> 
+          <input type = "hidden" name = "cancel_return" value = "/checkout.php" /> 
+          <input type = "hidden" name = "return" value = "/" /> 
+          <input type="hidden" name="business" value="aphomthavong@business.example.com">
+
           <h4 class="d-flex justify-content-between align-items-center mb-3">
             <span class="text-muted">Your cart</span>
-            <span class="badge badge-secondary badge-pill">3</span>
+            <span><?php echo $numcart; ?></span>
           </h4>
+
+
+<!-- PAYMENT SECTION BEGIN -->
+
           <ul class="list-group mb-3">
+
+          <?php
+
+          $total=0;
+
+          while($getcartrow = $getcart->fetch()) {
+            $itemname = $getcartrow['name'];
+            $itemnumber = $getcartrow['product_id'];
+            $price = $getcartrow['price'];
+            $qty = $getcartrow['qty'];
+            $total += $price * $qty;
+          
+          ?>
+
             <li class="list-group-item d-flex justify-content-between lh-condensed">
               <div>
-                <h6 class="my-0">Product name</h6>
-                <small class="text-muted">Brief description</small>
+                <h6 class="my-0"><?php echo $itemname; ?></h6>
               </div>
-              <span class="text-muted">$12</span>
+              <span class="text-muted">$<?php echo $qty. ' @ $' .$price; ?></span>
             </li>
-            <li class="list-group-item d-flex justify-content-between lh-condensed">
-              <div>
-                <h6 class="my-0">Second product</h6>
-                <small class="text-muted">Brief description</small>
-              </div>
-              <span class="text-muted">$8</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between lh-condensed">
-              <div>
-                <h6 class="my-0">Third item</h6>
-                <small class="text-muted">Brief description</small>
-              </div>
-              <span class="text-muted">$5</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between bg-light">
-              <div class="text-success">
-                <h6 class="my-0">Promo code</h6>
-                <small>EXAMPLECODE</small>
-              </div>
-              <span class="text-success">-$5</span>
-            </li>
+          <?php 
+          } 
+          ?>
+
+
             <li class="list-group-item d-flex justify-content-between">
               <span>Total (USD)</span>
-              <strong>$20</strong>
+              <strong>$<?php echo $total; ?></strong>
             </li>
           </ul>
 
-          <form class="card p-2">
-            <div class="input-group">
-              <input type="text" class="form-control" placeholder="Promo code">
-              <div class="input-group-append">
-                <button type="submit" class="btn btn-secondary">Redeem</button>
-              </div>
-            </div>
-          </form>
+
+<!-- PAYMENT SECTION END -->
+
+
         </div>
         <div class="col-md-8 order-md-1">
           <h4 class="mb-3">Billing address</h4>
-          <form class="needs-validation" novalidate>
+          
             <div class="row">
               <div class="col-md-6 mb-3">
                 <label for="firstName">First name</label>
-                <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+                <input type="text" name="first_name" class="form-control" id="firstName" placeholder="" value="" required>
                 <div class="invalid-feedback">
                   Valid first name is required.
                 </div>
               </div>
               <div class="col-md-6 mb-3">
                 <label for="lastName">Last name</label>
-                <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
+                <input type="text" name="last_name" class="form-control" id="lastName" placeholder="" value="" required>
                 <div class="invalid-feedback">
                   Valid last name is required.
                 </div>
@@ -122,21 +154,8 @@
             </div>
 
             <div class="mb-3">
-              <label for="username">Username</label>
-              <div class="input-group">
-                <div class="input-group-prepend">
-                  <span class="input-group-text">@</span>
-                </div>
-                <input type="text" class="form-control" id="username" placeholder="Username" required>
-                <div class="invalid-feedback" style="width: 100%;">
-                  Your username is required.
-                </div>
-              </div>
-            </div>
-
-            <div class="mb-3">
               <label for="email">Email <span class="text-muted">(Optional)</span></label>
-              <input type="email" class="form-control" id="email" placeholder="you@example.com">
+              <input type="email" name="email" class="form-control" id="email" placeholder="you@example.com">
               <div class="invalid-feedback">
                 Please enter a valid email address for shipping updates.
               </div>
@@ -144,7 +163,7 @@
 
             <div class="mb-3">
               <label for="address">Address</label>
-              <input type="text" class="form-control" id="address" placeholder="1234 Main St" required>
+              <input type="text" name="address1" class="form-control" id="address" placeholder="1234 Main St" required>
               <div class="invalid-feedback">
                 Please enter your shipping address.
               </div>
@@ -152,47 +171,39 @@
 
             <div class="mb-3">
               <label for="address2">Address 2 <span class="text-muted">(Optional)</span></label>
-              <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">
+              <input type="text" name="address2" class="form-control" id="address2" placeholder="Apartment or suite">
             </div>
 
             <div class="row">
-              <div class="col-md-5 mb-3">
-                <label for="country">Country</label>
-                <select class="custom-select d-block w-100" id="country" required>
-                  <option value="">Choose...</option>
-                  <option>United States</option>
-                </select>
+              <div class="col-md-5 mb-3" id ="City">
+                <label for="city">City</label>
+                <input type="text" class="form-control" name="city"  placeholder="City">
                 <div class="invalid-feedback">
-                  Please select a valid country.
+                  Please select a valid city.
                 </div>
               </div>
-              <div class="col-md-4 mb-3">
-                <label for="state">State</label>
-                <select class="custom-select d-block w-100" id="state" required>
-                  <option value="">Choose...</option>
-                  <option>California</option>
-                </select>
+              <div class="col-md-4 mb-3" id ="State">
+              <label for="state">State</label>
+                <input type="text" class="form-control" name="state"  placeholder="State">
                 <div class="invalid-feedback">
                   Please provide a valid state.
                 </div>
               </div>
               <div class="col-md-3 mb-3">
                 <label for="zip">Zip</label>
-                <input type="text" class="form-control" id="zip" placeholder="" required>
+                <input type="text" class="form-control" name="zip" id="zip" placeholder="" >
                 <div class="invalid-feedback">
                   Zip code required.
                 </div>
               </div>
             </div>
+
             <hr class="mb-4">
             <div class="custom-control custom-checkbox">
               <input type="checkbox" class="custom-control-input" id="same-address">
               <label class="custom-control-label" for="same-address">Shipping address is the same as my billing address</label>
             </div>
-            <div class="custom-control custom-checkbox">
-              <input type="checkbox" class="custom-control-input" id="save-info">
-              <label class="custom-control-label" for="save-info">Save this information for next time</label>
-            </div>
+
             <hr class="mb-4">
 
             <h4 class="mb-3">Payment</h4>
@@ -250,24 +261,73 @@
         </div>
       </div>
 
-      <footer class="my-5 pt-5 text-muted text-center text-small">
-        <p class="mb-1">&copy; 2017-2018 Company Name</p>
-        <ul class="list-inline">
-          <li class="list-inline-item"><a href="#">Privacy</a></li>
-          <li class="list-inline-item"><a href="#">Terms</a></li>
-          <li class="list-inline-item"><a href="#">Support</a></li>
-        </ul>
-      </footer>
+          
     </div>
+    <!-- footer section -->
+    <section class="container-fluid footer_section">
+      <div class="container">
+        <div class="row justify-content-between">
+          <div class="col-md-4 footer-col">
+            <div class="footer_form">
+              <h4>Join Our Newsletter!</h4>
+              <form action="">
+                <input type="text" placeholder="Enter Your Email" />
+                <button type="submit">Subscribe</button>
+              </form>
+            </div>
+          </div>
+          <div class="col-sm-6 col-md-4 col-lg-3 footer-col text-center">
+            <div class="footer_detail">
+              <a href="index.html">
+                <h4>Kop Chai Jerky</h4>
+              </a>
+              <p>
+                Kop Chai Jerky is a Woman-Owned Small Business based out of San
+                Diego, CA. Your support means everything to us!
+              </p>
+              <div class="social_box">
+                <a href="">
+                  <i class="fa fa-facebook" aria-hidden="true"></i>
+                </a>
+                <a href="">
+                  <i class="fa fa-instagram" aria-hidden="true"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 col-md-4 col-lg-3 footer-col">
+            <h4>Contact us</h4>
+            <div class="contact_nav">
+              <a href="">
+                <i class="fa fa-map-marker" aria-hidden="true"></i>
+                <span> San Diego, CA </span>
+              </a>
+              <a href="">
+                <i class="fa fa-phone" aria-hidden="true"></i>
+                <span> Call: (619) 555-1234 </span>
+              </a>
+              <a href="">
+                <i class="fa fa-envelope" aria-hidden="true"></i>
+                <span> Email: sales@kopchaijerky.com </span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="footer-info">
+          <p>
+            &copy; <span id="displayYear"></span> All Rights Reserved By Kop
+            Chai Jerky
+          </p>
+        </div>
+      </div>
+    </section>
+    <!-- end  footer section -->
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
-    <script src="../../assets/js/vendor/popper.min.js"></script>
-    <script src="../../dist/js/bootstrap.min.js"></script>
-    <script src="../../assets/js/vendor/holder.min.js"></script>
+
     <script>
       // Example starter JavaScript for disabling form submissions if there are invalid fields
       (function() {

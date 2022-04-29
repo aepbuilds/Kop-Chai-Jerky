@@ -12,6 +12,15 @@ $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 //get action string
 $action = isset($_GET['action'])?$_GET['action']:"";
 
+//get cart items
+$getcart = $dbh->prepare("select products.name, products.product_id, products.price, cartitems.qty
+from products, cartitems
+where cartitems.productid = products.product_id and cartitems.sessionid = '$sessid'");
+
+$getcart->execute();
+$getcartrow = $getcart->fetch();
+$qty = $getcartrow['qty'];
+
 //Add to cart
 if($action=='addcart' && $_SERVER['REQUEST_METHOD']=='POST') {
 	
@@ -53,24 +62,6 @@ if($action=='addcart' && $_SERVER['REQUEST_METHOD']=='POST') {
 	$product='';
 	header("Location:index.php");
 }
-
-//Empty All
-if($action=='emptyall') {
-	$_SESSION['products'] =array();
-	header("Location:index.php");	
-}
-
-//Empty one by one
-if($action=='empty') {
-	$sku = $_GET['sku'];
-	$products = $_SESSION['products'];
-	unset($products[$sku]);
-	$_SESSION['products']= $products;
-	header("Location:index.php");	
-}
-
-
- 
  
  //Get all Products
 $query = "SELECT * FROM products";
@@ -118,7 +109,7 @@ $products = $stmt->fetchAll();
     <!-- header section starts -->
     <header class="header_section container">
       <nav class="navbar navbar-expand-lg">
-        <a class="kpj-navbar-brand" href="index.html">
+        <a class="kpj-navbar-brand" href="index.php">
           <img src="images/logo.png" alt="KopChai Jerky" />
         </a>
         <div class="mr-auto flex-column flex-lg-row me-auto">
@@ -131,12 +122,19 @@ $products = $stmt->fetchAll();
             </li>
           </ul>
         </div>
-        <div class="header-search col-md-4 .offset-md-4 flex-row">
-          <form action="">
-            <input type="text" placeholder="Search" />
-            <button type="submit">Search</button>
-          </form>
-          <i class="fa fa-shopping-cart"></i>
+        <div class="header-search col-md-4">
+          <!-- <div class="search">
+            <form action="">
+              <input type="text" placeholder="Search" />
+              <button type="submit">Search</button>
+            </form>
+          </div> -->
+          <div class="shopping-cart">
+            <a href="checkout.php">
+              <i class="fa fa-shopping-cart"></i>
+            </a>
+            <p><span><?php echo $qty; ?></span> Items in Cart</p>
+          </div>
         </div>
       </nav>
     </header>
@@ -213,6 +211,9 @@ $products = $stmt->fetchAll();
               </div>
               <div class="detail-box">
                 <h3><?php print $product['name']?></h3>
+
+
+
                 <div class="box-rating">
                   <i class="fa fa-star" aria-hidden="true"></i>
                   <i class="fa fa-star" aria-hidden="true"></i>
@@ -220,6 +221,9 @@ $products = $stmt->fetchAll();
                   <i class="fa fa-star" aria-hidden="true"></i>
                   <i class="fa fa-star" aria-hidden="true"></i>
                 </div>
+
+
+
                 <div class="price_box">
                   <h6 class="price_heading">$<?php print $product['price']?></h6>
                 </div>
@@ -227,10 +231,11 @@ $products = $stmt->fetchAll();
 
             <form method="post" action="index.php?action=addcart">
                 <select name="qty">
-                  <option value="0">0</option>
                   <option value="1">1</option>
                   <option value="2">2</option>
                   <option value="3">3</option>
+                  <option value="3">4</option>
+                  <option value="3">5</option>
                 </select>
                 <button type="submit" class="btn btn-warning">Add To Cart</button>
                 <input type="hidden" name="sku" value="<?php print $product['sku']?>">
@@ -260,7 +265,7 @@ $products = $stmt->fetchAll();
 
     <!-- about section -->
 
-    <section class="about_section">
+    <section class="about_section" id="about">
       <!-- <div class="about_bg_box"></div> -->
       <div class="container">
         <div class="row">
@@ -295,7 +300,7 @@ $products = $stmt->fetchAll();
     <!-- end about section -->
 
     <!-- Unique section -->
-    <section class="contact_section layout_padding2-top">
+    <section class="contact_section" id="contact">
       <div class="container">
         <div class="heading_container text-center">
           <h2>What Makes Us Unique</h2>

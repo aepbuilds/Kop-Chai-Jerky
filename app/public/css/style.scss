@@ -191,13 +191,21 @@ body {
       }
     }
   }
-  .fa-shopping-cart {
-    position: absolute;
-    top: 4rem;
-    right: 0;
-    font-size: 2rem;
-    /* margin: 0 auto; */
-}
+  .shopping-cart {
+    display: flex;
+    justify-content: flex-end;
+    .fa-shopping-cart {
+      // position: absolute;
+      // top: 4rem;
+      // right: 0;
+      font-size: 2rem;
+    }
+    span {
+      font-size: 1.5rem;
+      margin-left: 1rem;
+    }
+  }
+  
 }
 
 
@@ -412,13 +420,12 @@ a:focus {
       }
 
       .price_heading {
-        margin-top: 10px;
+        margin: 10px 0;
+        font-size: 1.5rem;
 
         span {
           color: $primary1;
         }
-
-        margin-bottom: 0;
       }
     }
     
@@ -436,7 +443,7 @@ a:focus {
 
   select {
     display: block;
-    margin: 0 auto;
+    margin: 10px auto;
   }
 }
 
@@ -451,7 +458,7 @@ a:focus {
   padding: 145px 0;
   position: relative;
   color: $black;
-  background: linear-gradient(to right, rgba($color : #F2F2F2, $alpha : 0.85), rgba($color : $primary2, $alpha : 0.45), rgba($color : $primary2, $alpha : 0.25));
+  //background: linear-gradient(to right, rgba($color : #F2F2F2, $alpha : 0.85), rgba($color : $primary2, $alpha : 0.45), rgba($color : $primary2, $alpha : 0.25));
 
   .about_bg_box {
     position: absolute;
@@ -507,6 +514,9 @@ a:focus {
 // end about section
 
 // Unique Section
+.contact_section {
+  margin-bottom: 5rem;
+}
 .contact_section .heading_container {
   margin-bottom: 5rem;
 }
@@ -533,6 +543,11 @@ a:focus {
     height: 200px;
     border-radius: 10px;
   }
+}
+
+// Checkout Form
+.checkout-form {
+  margin-bottom: 5rem;
 }
 
 /* footer section*/

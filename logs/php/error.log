@@ -3,3 +3,20 @@
 [29-Apr-2022 16:24:46 UTC] PHP Notice:  Trying to access array offset on value of type bool in /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/index.php on line 35
 [29-Apr-2022 16:24:46 UTC] PHP Stack trace:
 [29-Apr-2022 16:24:46 UTC] PHP   1. {main}() /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/index.php:0
+[29-Apr-2022 18:05:29 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'products.descrip' in 'field list' in /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/checkout.php:19
+Stack trace:
+#0 /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/checkout.php(19): PDOStatement->execute()
+#1 {main}
+  thrown in /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/checkout.php on line 19
+[29-Apr-2022 18:54:55 UTC] PHP Notice:  Trying to access array offset on value of type bool in /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/index.php on line 35
+[29-Apr-2022 18:54:55 UTC] PHP Stack trace:
+[29-Apr-2022 18:54:55 UTC] PHP   1. {main}() /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/index.php:0
+[29-Apr-2022 18:55:00 UTC] PHP Notice:  Trying to access array offset on value of type bool in /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/index.php on line 35
+[29-Apr-2022 18:55:00 UTC] PHP Stack trace:
+[29-Apr-2022 18:55:00 UTC] PHP   1. {main}() /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/index.php:0
+[29-Apr-2022 18:58:47 UTC] PHP Notice:  Undefined variable: qty in /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/index.php on line 140
+[29-Apr-2022 18:58:47 UTC] PHP Stack trace:
+[29-Apr-2022 18:58:47 UTC] PHP   1. {main}() /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/index.php:0
+[29-Apr-2022 19:02:08 UTC] PHP Notice:  Undefined variable: qty in /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/index.php on line 147
+[29-Apr-2022 19:02:08 UTC] PHP Stack trace:
+[29-Apr-2022 19:02:08 UTC] PHP   1. {main}() /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/index.php:0
