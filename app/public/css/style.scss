@@ -162,6 +162,12 @@ body {
 
 .header_section {
 
+  .navbar-items {
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }
+
   background-color: $white;
     //min-height: 125px;
     z-index: 1;
@@ -191,6 +197,7 @@ body {
       }
     }
   }
+
   .shopping-cart {
     display: flex;
     justify-content: flex-end;
@@ -213,11 +220,6 @@ a,
 a:hover,
 a:focus {
   text-decoration: none;
-}
-
-a:hover,
-a:focus {
-  //color: initial;
 }
 
 .btn,
@@ -361,6 +363,9 @@ a:focus {
   img {
     max-width: 500px;
     border-radius: 10px;
+    @media (max-width: 768px) {
+      max-width: 300px;
+    }
   }
 }
   .img-box {
@@ -381,6 +386,11 @@ a:focus {
 // Purchase section
 
 .veg_section {
+  .purchase-buttons form {
+    @media (max-width: 768px) {
+      margin: 0;
+    }
+  }
   .box {
     margin-top: 45px;
     // box-shadow: 0 0 5px 0 rgba($color: #000000, $alpha: .25);

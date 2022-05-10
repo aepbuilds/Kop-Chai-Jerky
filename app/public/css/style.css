@@ -146,6 +146,12 @@ body {
   z-index: 1;
 }
 
+@media (max-width: 768px) {
+  .header_section .navbar-items {
+    display: none;
+  }
+}
+
 .header_section .container-fluid {
   padding-right: 25px;
   padding-left: 25px;
@@ -397,6 +403,12 @@ a:focus {
   border-radius: 10px;
 }
 
+@media (max-width: 768px) {
+  .slider_section .detail-box-image img {
+    max-width: 300px;
+  }
+}
+
 .slider_section .img-box {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -411,6 +423,12 @@ a:focus {
   width: 100%;
   -webkit-filter: drop-shadow(0 7px 5px rgba(0, 0, 0, 0.05));
           filter: drop-shadow(0 7px 5px rgba(0, 0, 0, 0.05));
+}
+
+@media (max-width: 768px) {
+  .veg_section .purchase-buttons form {
+    margin: 0;
+  }
 }
 
 .veg_section .box {
