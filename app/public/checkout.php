@@ -1,9 +1,9 @@
 <?php
-error_reporting(E_ALL);
+//error_reporting(E_ALL);
 //Setting session start
 session_start();
 $sessid = session_id();
-var_dump($_SESSION);
+//var_dump($_SESSION);
 
 $numcart = count($_SESSION['products']);
 
@@ -73,7 +73,7 @@ $getcart->execute();
 
     <div class="container checkout-form">
       <div class="py-5 text-center">
-        <img class="d-block mx-auto mb-4" src="images/logo.png" alt="Kop Chai Jerky" width="150" height="150">
+        <a href="index.php"><img class="d-block mx-auto mb-4" src="images/logo.png" alt="Kop Chai Jerky" width="150" height="150"></a>
         <h2>Checkout form</h2>
       </div>
 

@@ -139,13 +139,15 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 85%;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 75%);
 
     img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       object-position: top right;
+      
     }
 
     &::before {
@@ -158,6 +160,34 @@ body {
       background: linear-gradient(to right, rgba($color : #F2F2F2, $alpha : 0.85), rgba($color : $primary2, $alpha : 0.45), rgba($color : $primary2, $alpha : 0.25));
     }
   }
+  @media (min-width: 768px) {
+
+    // .hero-text {
+    //   animation: slideLeft 1s ease-in;
+    // }
+    // .hero-image {
+    //   animation: slideRight 1s ease-in;
+    // }
+
+
+    // @keyframes slideLeft { 
+    //   0% {
+    //     transform: translateX(-100%);
+    //   }
+    //   100% {
+    //     transform: translateX(0);
+    //   }
+    // }
+    // @keyframes slideRight { 
+    //   0% {
+    //     transform: translateX(100%);
+    //   }
+    //   100% {
+    //     transform: translateX(0);
+    //   }
+    // }
+  }
+
 }
 
 .header_section {
@@ -316,7 +346,7 @@ a:focus {
 
 .header-search {
   button {
-    @include hero_btn($primary1, $white, 2px, 10px, 0px);
+    @include hero_btn($primary1, $white, 2px, 10px, 5px);
   }
 }
 
@@ -356,13 +386,13 @@ a:focus {
       @include hero_btn($primary1, $white, 10px, 45px, 0);
     }
     button {
-      @include hero_btn($primary1, $white, 10px, 45px, 0px);
+      @include hero_btn($primary1, $white, 10px, 45px, 5px);
     }
   }
 .detail-box-image {
   img {
     max-width: 500px;
-    border-radius: 10px;
+    box-shadow: 0px 10px 10px #33333391;
     @media (max-width: 768px) {
       max-width: 300px;
     }
@@ -516,12 +546,44 @@ a:focus {
       max-width: 400px;
       height: auto;
       border-radius: 10px;
+      @media (max-width: 768px) {
+        max-width: 300px;
+      }
     }
     
   }
 }
 
 // end about section
+
+// Contact Form
+.contact-form {
+  input {
+    width: 100%;
+    border: none;
+    height: 50px;
+    margin-bottom: 20px;
+    padding-left: 20px;
+    //outline: none;
+    color: #101010;
+    border-radius: 5px;
+    box-shadow: 0 0 3px 0 rgba($color: #000000, $alpha: 0.5);
+
+    &::placeholder {
+      color: $primary2;
+    }
+
+    &.message-box {
+      height: 120px;
+      border-radius: 15px;
+    }
+  }
+
+  button {
+    @include hero_btn($primary1, $white, 10px, 45px, 5px);
+    margin-top: 1rem;
+  }
+}
 
 // Unique Section
 .contact_section {
@@ -565,6 +627,7 @@ a:focus {
   padding: 100px 0 25px 0;
   background-color: darken($color: $primary2, $amount: 10);
   color: #fefefe;
+  clip-path: polygon(0 0, 100% 25%, 100% 100%, 0 100%);
 
   .footer-col {
     margin-bottom: 45px;
@@ -632,7 +695,7 @@ a:focus {
     }
 
     button {
-      @include hero_btn($primary1, $white, 10px, 45px, 0px);
+      @include hero_btn($primary1, $white, 10px, 45px, 5px);
     }
 
   }
@@ -657,3 +720,14 @@ a:focus {
 }
 
 /* end footer section*/
+
+// Single Product Page
+
+@media (min-width: 768px) {
+  .single-product-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 1rem;
+  }
+}

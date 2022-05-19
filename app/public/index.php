@@ -1,78 +1,4 @@
-<?php 
-
-error_reporting(E_ALL);
-
-session_start();
-$sessid = session_id();
-$total = 0;
-
-//Database connection, replace with your connection string.. Used PDO
-$dbh = new PDO("mysql:host=localhost;dbname=kopchaijerky", "root", "root");
-$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-//get action string
-$action = isset($_GET['action'])?$_GET['action']:"";
-
-//get cart items
-$getcart = $dbh->prepare("select products.name, products.product_id, products.price, cartitems.qty
-from products, cartitems
-where cartitems.productid = products.product_id and cartitems.sessionid = '$sessid'");
-
-$getcart->execute();
-$getcartrow = $getcart->fetch();
-$qty = $getcartrow['qty'];
-
-
-//Add to cart
-if($action=='addcart' && $_SERVER['REQUEST_METHOD']=='POST') {
-	
-  $qty = $_POST['qty'];
-
-	//Finding the product by code
-	$query = "SELECT * FROM products WHERE sku=:sku";
-	$stmt = $dbh->prepare($query);
-	$stmt->bindParam('sku', $_POST['sku']);
-	$stmt->execute();
-	$product = $stmt->fetch();
-
-  $productid = $product['product_id'];
-
-
-  //check the cartitem table to see if sku is in there
-  $chkquery = "SELECT * FROM cartitems WHERE productid = '$productid' and sessionid = '$sessid'";
-  $chkstmt = $dbh->prepare($chkquery);
-  $chkstmt->execute();
-  $productincart = $chkstmt->fetch();
-  $id = $productincart['id'];
-  if (!empty($id)){
-    $upstmt = $dbh->prepare("update cartitems set qty = '$qty' where productid = '$productid' and sessionid = '$sessid'");
-    $upstmt->execute();
-  }
-  else {
-    $instmt = $dbh->prepare("insert into cartitems (productid,sessionid,timeofentry,qty) values ('$productid','$sessid',now(),'$qty')");
-    $instmt->execute();
-
-  }
-  //if it is, we'll write an update statement
-
-
-  //else write an insert statement
-
-	
-	$currentQty = $_POST['qty']; //Incrementing the product qty in cart
-	$_SESSION['products'][$_POST['sku']] =array('qty'=>$currentQty,'name'=>$product['name'],'image'=>$product['image'],'price'=>$product['price']);
-	$product='';
-	header("Location:index.php");
-}
- 
- //Get all Products
-$query = "SELECT * FROM products";
-$stmt = $dbh->prepare($query);
-$stmt->execute();
-$products = $stmt->fetchAll();
-
-
-?>
+<?php include 'dbconnection.php' ?>
 
 <!DOCTYPE html>
 <html>
@@ -152,7 +78,7 @@ $products = $stmt->fetchAll();
             <div class="carousel-item active">
               <div class="container">
                 <div class="row">
-                  <div class="col-md-6">
+                  <div class="col-md-6 hero-text">
                     <div class="detail-box">
                       <div class="detail-box-body">
                         <h3>Flavor Of The Week</h3>
@@ -182,7 +108,7 @@ $products = $stmt->fetchAll();
                       </div>
                     </div>
                   </div>
-                  <div class="col-md-6">
+                  <div class="col-md-6 hero-image">
                     <div class="detail-box-image">
                       <img
                         src="images/spicy_bomb_cut_2.png"
@@ -209,7 +135,7 @@ $products = $stmt->fetchAll();
           <div class="col-md-6 col-lg-3">
             <div class="box">
               <div class="img-box">
-                <img src="<?php print $product['image']?>" alt="<?php print $product['name']?>" />
+                <a href="/products/<?php print $product['link']?>"><img src="<?php print $product['image']?>" alt="<?php print $product['name']?>" /></a>
               </div>
               <div class="detail-box">
                 <h3><?php print $product['name']?></h3>
@@ -236,8 +162,8 @@ $products = $stmt->fetchAll();
                   <option value="1">1</option>
                   <option value="2">2</option>
                   <option value="3">3</option>
-                  <option value="3">4</option>
-                  <option value="3">5</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
                 </select>
                 <button type="submit" class="btn btn-warning">Add To Cart</button>
                 <input type="hidden" name="sku" value="<?php print $product['sku']?>">
@@ -307,7 +233,7 @@ $products = $stmt->fetchAll();
 <div class="container">
 
     <!--Grid column-->
-    <div class="col-md-12">
+    <div class="col-md-12 contact-form" id="contact">
     <div class="heading_container text-center">
           <h2>Contact Us</h2>
         </div>
@@ -319,8 +245,7 @@ $products = $stmt->fetchAll();
                 <!--Grid column-->
                 <div class="col-md-6">
                     <div class="md-form mb-0">
-                        <input type="text" id="name" name="name" class="form-control">
-                        <label for="name" class="">Your name</label>
+                        <input type="text" id="name" name="name" class="form-control" placeholder="Name">
                     </div>
                 </div>
                 <!--Grid column-->
@@ -328,8 +253,7 @@ $products = $stmt->fetchAll();
                 <!--Grid column-->
                 <div class="col-md-6">
                     <div class="md-form mb-0">
-                        <input type="text" id="email" name="email" class="form-control">
-                        <label for="email" class="">Your email</label>
+                        <input type="text" id="email" name="email" class="form-control" placeholder="Email">
                     </div>
                 </div>
                 <!--Grid column-->
@@ -341,8 +265,7 @@ $products = $stmt->fetchAll();
             <div class="row">
                 <div class="col-md-12">
                     <div class="md-form mb-0">
-                        <input type="text" id="subject" name="subject" class="form-control">
-                        <label for="subject" class="">Subject</label>
+                        <input type="text" id="subject" name="subject" class="form-control" placeholder="Subject">
                     </div>
                 </div>
             </div>
@@ -355,8 +278,7 @@ $products = $stmt->fetchAll();
                 <div class="col-md-12">
 
                     <div class="md-form">
-                        <textarea type="text" id="message" name="message" rows="2" class="form-control md-textarea"></textarea>
-                        <label for="message">Your message</label>
+                        <textarea type="text" id="message" name="message" rows="2" class="form-control md-textarea" placeholder="Message"></textarea>
                     </div>
 
                 </div>
@@ -366,7 +288,8 @@ $products = $stmt->fetchAll();
         </form>
 
         <div class="text-center text-md-left">
-            <a class="btn btn-primary" onclick="document.getElementById('contact-form').submit();">Send</a>
+            <!-- <a class="btn btn-primary" onclick="document.getElementById('contact-form').submit();">Send</a> -->
+            <button class="btn btn-primary" >Send</button>
         </div>
         <div class="status"></div>
     </div>
@@ -382,7 +305,7 @@ $products = $stmt->fetchAll();
 <!--Section: Contact v.2-->
 
     <!-- Unique section -->
-    <section class="contact_section" id="contact">
+    <section class="contact_section d-none" id="contact">
       <div class="container">
         <div class="heading_container text-center">
           <h2>What Makes Us Unique</h2>
