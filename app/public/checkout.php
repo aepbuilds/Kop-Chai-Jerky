@@ -101,7 +101,7 @@ $getcart->execute();
           <?php
 
           $total=0;
-
+          
           while($getcartrow = $getcart->fetch()) {
             $itemname = $getcartrow['name'];
             $itemnumber = $getcartrow['product_id'];
@@ -204,8 +204,7 @@ $getcart->execute();
               <label class="custom-control-label" for="same-address">Shipping address is the same as my billing address</label>
             </div>
 
-            <hr class="mb-4">
-
+<!-- 
             <h4 class="mb-3">Payment</h4>
 
             <div class="d-block my-3">
@@ -254,7 +253,7 @@ $getcart->execute();
                   Security code required
                 </div>
               </div>
-            </div>
+            </div> -->
             <hr class="mb-4">
             <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
           </form>
