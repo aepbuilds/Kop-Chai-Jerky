@@ -374,3 +374,45 @@ Stack trace:
 [19-May-2022 15:22:46 UTC] PHP Notice:  Trying to access array offset on value of type null in /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/products/weaksauce.php on line 98
 [19-May-2022 15:22:46 UTC] PHP Stack trace:
 [19-May-2022 15:22:46 UTC] PHP   1. {main}() /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/products/weaksauce.php:0
+[20-May-2022 01:38:50 UTC] PHP Notice:  Trying to access array offset on value of type bool in /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/dbconnection.php on line 46
+[20-May-2022 01:38:50 UTC] PHP Stack trace:
+[20-May-2022 01:38:50 UTC] PHP   1. {main}() /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/index.php:0
+[20-May-2022 01:38:50 UTC] PHP   2. include() /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/index.php:1
+[24-May-2022 16:16:21 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/Applications/Local.app/Contents/Resources/extraResources/lightning-services/php-7.4.1+16/bin/darwin/lib/php/extensions/no-debug-non-zts-20190902/imagick.so' (tried: /Applications/Local.app/Contents/Resources/extraResources/lightning-services/php-7.4.1+16/bin/darwin/lib/php/extensions/no-debug-non-zts-20190902/imagick.so (dlopen(/Applications/Local.app/Contents/Resources/extraResources/lightning-services/php-7.4.1+16/bin/darwin/lib/php/extensions/no-debug-non-zts-20190902/imagick.so, 9): image not found), /Users/runner/work/_temp/local-lightning-php/php-7.4.1/build/lib/php/extensions/no-debug-non-zts-20190902//Applications/Local.app/Contents/Resources/extraResources/lightning-services/php-7.4.1+16/bin/darwin/lib/php/extensions/no-debug-non-zts-20190902/imagick.so.so (dlopen(/Users/runner/work/_temp/local-lightning-php/php-7.4.1/build/lib/php/extensions/no-debug-non-zts-20190902//Applications/Local.app/Contents/Resources/extraResources/lightning-services/php-7.4.1+1 in Unknown on line 0
+[24-May-2022 16:16:21 UTC] PHP Warning:  PHP Startup: Unable to load dynamic library '/Applications/Local.app/Contents/Resources/extraResources/lightning-services/php-7.4.1+16/bin/darwin/lib/php/extensions/no-debug-non-zts-20190902/imagick.so' (tried: /Applications/Local.app/Contents/Resources/extraResources/lightning-services/php-7.4.1+16/bin/darwin/lib/php/extensions/no-debug-non-zts-20190902/imagick.so (dlopen(/Applications/Local.app/Contents/Resources/extraResources/lightning-services/php-7.4.1+16/bin/darwin/lib/php/extensions/no-debug-non-zts-20190902/imagick.so, 9): image not found), /Users/runner/work/_temp/local-lightning-php/php-7.4.1/build/lib/php/extensions/no-debug-non-zts-20190902//Applications/Local.app/Contents/Resources/extraResources/lightning-services/php-7.4.1+16/bin/darwin/lib/php/extensions/no-debug-non-zts-20190902/imagick.so.so (dlopen(/Users/runner/work/_temp/local-lightning-php/php-7.4.1/build/lib/php/extensions/no-debug-non-zts-20190902//Applications/Local.app/Contents/Resources/extraResources/lightning-services/php-7.4.1+1 in Unknown on line 0
+[24-May-2022 19:21:20 UTC] PHP Notice:  Undefined index: products in /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/checkout.php on line 8
+[24-May-2022 19:21:20 UTC] PHP Stack trace:
+[24-May-2022 19:21:20 UTC] PHP   1. {main}() /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/checkout.php:0
+[24-May-2022 19:21:20 UTC] PHP Warning:  count(): Parameter must be an array or an object that implements Countable in /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/checkout.php on line 8
+[24-May-2022 19:21:20 UTC] PHP Stack trace:
+[24-May-2022 19:21:20 UTC] PHP   1. {main}() /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/checkout.php:0
+[24-May-2022 19:21:23 UTC] PHP Notice:  Undefined index: products in /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/checkout.php on line 8
+[24-May-2022 19:21:23 UTC] PHP Stack trace:
+[24-May-2022 19:21:23 UTC] PHP   1. {main}() /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/checkout.php:0
+[24-May-2022 19:21:23 UTC] PHP Warning:  count(): Parameter must be an array or an object that implements Countable in /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/checkout.php on line 8
+[24-May-2022 19:21:23 UTC] PHP Stack trace:
+[24-May-2022 19:21:23 UTC] PHP   1. {main}() /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/checkout.php:0
+[24-May-2022 19:21:44 UTC] PHP Notice:  Undefined index: products in /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/checkout.php on line 8
+[24-May-2022 19:21:44 UTC] PHP Stack trace:
+[24-May-2022 19:21:44 UTC] PHP   1. {main}() /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/checkout.php:0
+[24-May-2022 19:21:44 UTC] PHP Warning:  count(): Parameter must be an array or an object that implements Countable in /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/checkout.php on line 8
+[24-May-2022 19:21:44 UTC] PHP Stack trace:
+[24-May-2022 19:21:44 UTC] PHP   1. {main}() /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/checkout.php:0
+[24-May-2022 19:21:47 UTC] PHP Notice:  Undefined index: products in /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/checkout.php on line 8
+[24-May-2022 19:21:47 UTC] PHP Stack trace:
+[24-May-2022 19:21:47 UTC] PHP   1. {main}() /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/checkout.php:0
+[24-May-2022 19:21:47 UTC] PHP Warning:  count(): Parameter must be an array or an object that implements Countable in /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/checkout.php on line 8
+[24-May-2022 19:21:47 UTC] PHP Stack trace:
+[24-May-2022 19:21:47 UTC] PHP   1. {main}() /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/checkout.php:0
+[24-May-2022 19:22:33 UTC] PHP Notice:  Undefined index: products in /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/checkout.php on line 8
+[24-May-2022 19:22:33 UTC] PHP Stack trace:
+[24-May-2022 19:22:33 UTC] PHP   1. {main}() /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/checkout.php:0
+[24-May-2022 19:22:33 UTC] PHP Warning:  count(): Parameter must be an array or an object that implements Countable in /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/checkout.php on line 8
+[24-May-2022 19:22:33 UTC] PHP Stack trace:
+[24-May-2022 19:22:33 UTC] PHP   1. {main}() /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/checkout.php:0
+[24-May-2022 19:22:43 UTC] PHP Notice:  Undefined index: products in /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/checkout.php on line 8
+[24-May-2022 19:22:43 UTC] PHP Stack trace:
+[24-May-2022 19:22:43 UTC] PHP   1. {main}() /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/checkout.php:0
+[24-May-2022 19:22:43 UTC] PHP Warning:  count(): Parameter must be an array or an object that implements Countable in /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/checkout.php on line 8
+[24-May-2022 19:22:43 UTC] PHP Stack trace:
+[24-May-2022 19:22:43 UTC] PHP   1. {main}() /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/checkout.php:0
