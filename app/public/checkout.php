@@ -100,14 +100,23 @@ $getcart->execute();
 
           <?php
 
-          $total=0;
-          
+          $total = 0;
+          $i = 0;
+
           while($getcartrow = $getcart->fetch()) {
             $itemname = $getcartrow['name'];
             $itemnumber = $getcartrow['product_id'];
             $price = $getcartrow['price'];
             $qty = $getcartrow['qty'];
+            if ($qty == 0) $qty = 1;
             $total += $price * $qty;
+
+            if ($numcart > 1) {
+              $out = '_'.$i;
+            }
+            else {
+              $out = '';
+            }
           
           ?>
 
@@ -118,8 +127,16 @@ $getcart->execute();
               <span class="text-muted">$<?php echo $qty. ' @ $' .$price; ?></span>
             </li>
           <?php 
+
+          echo '<input type = "hidden" name = "item_name'.$out.'" value = "'.$itemname.'" />
+          <input type = "hidden" name = "quantity'.$out.'" value = "'.$qty.'" /> 
+          <input type = "hidden" name = "amount'.$out.'" value = "'.$price.'" /> ';
+
+          $i++;
           } 
           ?>
+
+          
 
 
             <li class="list-group-item d-flex justify-content-between">
