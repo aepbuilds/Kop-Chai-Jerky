@@ -20,7 +20,7 @@ where cartitems.productid = products.product_id and cartitems.sessionid = '$sess
 
 $getcart->execute();
 $getcartrow = $getcart->fetch();
-$qty = $getcartrow['qty'];
+$qty = $getcartrow['qty'] ?? 0;
 
 
 //Add to cart

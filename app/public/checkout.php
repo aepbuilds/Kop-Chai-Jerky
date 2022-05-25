@@ -3,7 +3,7 @@
 //Setting session start
 session_start();
 $sessid = session_id();
-//var_dump($_SESSION);
+var_dump($_SESSION);
 
 $numcart = count($_SESSION['products']);
 
@@ -17,6 +17,8 @@ from products, cartitems
 where cartitems.productid = products.product_id and cartitems.sessionid = '$sessid'");
 
 $getcart->execute();
+
+$qty = 0;
 
 
 ?>
@@ -90,7 +92,7 @@ $getcart->execute();
 
           <h4 class="d-flex justify-content-between align-items-center mb-3">
             <span class="text-muted">Your cart</span>
-            <span><?php echo $numcart; ?></span>
+            <span><?php echo $qty; ?></span>
           </h4>
 
 
@@ -124,7 +126,7 @@ $getcart->execute();
               <div>
                 <h6 class="my-0"><?php echo $itemname; ?></h6>
               </div>
-              <span class="text-muted">$<?php echo $qty. ' @ $' .$price; ?></span>
+              <span class="text-muted"><?php echo $qty. ' @ $' .$price; ?></span>
             </li>
           <?php 
 

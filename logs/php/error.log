@@ -438,3 +438,70 @@ Stack trace:
 [25-May-2022 04:31:22 UTC] PHP Stack trace:
 [25-May-2022 04:31:22 UTC] PHP   1. {main}() /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/index.php:0
 [25-May-2022 04:31:22 UTC] PHP   2. include() /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/index.php:1
+[25-May-2022 04:44:35 UTC] PHP Notice:  Trying to access array offset on value of type bool in /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/dbconnection.php on line 23
+[25-May-2022 04:44:35 UTC] PHP Stack trace:
+[25-May-2022 04:44:35 UTC] PHP   1. {main}() /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/index.php:0
+[25-May-2022 04:44:35 UTC] PHP   2. include() /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/index.php:1
+[25-May-2022 04:44:36 UTC] PHP Notice:  Trying to access array offset on value of type bool in /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/dbconnection.php on line 23
+[25-May-2022 04:44:36 UTC] PHP Stack trace:
+[25-May-2022 04:44:36 UTC] PHP   1. {main}() /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/index.php:0
+[25-May-2022 04:44:36 UTC] PHP   2. include() /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/index.php:1
+[25-May-2022 04:44:36 UTC] PHP Notice:  Trying to access array offset on value of type bool in /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/dbconnection.php on line 23
+[25-May-2022 04:44:36 UTC] PHP Stack trace:
+[25-May-2022 04:44:36 UTC] PHP   1. {main}() /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/index.php:0
+[25-May-2022 04:44:36 UTC] PHP   2. include() /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/index.php:1
+[25-May-2022 04:44:39 UTC] PHP Notice:  Trying to access array offset on value of type bool in /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/dbconnection.php on line 23
+[25-May-2022 04:44:39 UTC] PHP Stack trace:
+[25-May-2022 04:44:39 UTC] PHP   1. {main}() /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/index.php:0
+[25-May-2022 04:44:39 UTC] PHP   2. include() /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/index.php:1
+[25-May-2022 04:45:37 UTC] PHP Notice:  Undefined variable: qty in /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/checkout.php on line 93
+[25-May-2022 04:45:37 UTC] PHP Stack trace:
+[25-May-2022 04:45:37 UTC] PHP   1. {main}() /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/checkout.php:0
+[25-May-2022 04:45:37 UTC] PHP Notice:  Trying to access array offset on value of type bool in /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/dbconnection.php on line 23
+[25-May-2022 04:45:37 UTC] PHP Stack trace:
+[25-May-2022 04:45:37 UTC] PHP   1. {main}() /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/index.php:0
+[25-May-2022 04:45:37 UTC] PHP   2. include() /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/index.php:1
+[25-May-2022 04:46:06 UTC] PHP Notice:  Trying to access array offset on value of type bool in /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/dbconnection.php on line 23
+[25-May-2022 04:46:06 UTC] PHP Stack trace:
+[25-May-2022 04:46:06 UTC] PHP   1. {main}() /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/index.php:0
+[25-May-2022 04:46:06 UTC] PHP   2. include() /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/index.php:1
+[25-May-2022 04:47:07 UTC] PHP Notice:  Trying to access array offset on value of type bool in /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/dbconnection.php on line 23
+[25-May-2022 04:47:07 UTC] PHP Stack trace:
+[25-May-2022 04:47:07 UTC] PHP   1. {main}() /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/index.php:0
+[25-May-2022 04:47:07 UTC] PHP   2. include() /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/index.php:1
+[25-May-2022 04:47:08 UTC] PHP Notice:  Trying to access array offset on value of type bool in /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/dbconnection.php on line 23
+[25-May-2022 04:47:08 UTC] PHP Stack trace:
+[25-May-2022 04:47:08 UTC] PHP   1. {main}() /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/index.php:0
+[25-May-2022 04:47:08 UTC] PHP   2. include() /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/index.php:1
+[25-May-2022 04:47:46 UTC] PHP Notice:  Trying to access array offset on value of type bool in /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/dbconnection.php on line 24
+[25-May-2022 04:47:46 UTC] PHP Stack trace:
+[25-May-2022 04:47:46 UTC] PHP   1. {main}() /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/index.php:0
+[25-May-2022 04:47:46 UTC] PHP   2. include() /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/index.php:1
+[25-May-2022 04:47:46 UTC] PHP Notice:  Trying to access array offset on value of type bool in /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/dbconnection.php on line 24
+[25-May-2022 04:47:46 UTC] PHP Stack trace:
+[25-May-2022 04:47:46 UTC] PHP   1. {main}() /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/index.php:0
+[25-May-2022 04:47:46 UTC] PHP   2. include() /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/index.php:1
+[25-May-2022 04:48:34 UTC] PHP Notice:  Trying to access array offset on value of type bool in /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/dbconnection.php on line 24
+[25-May-2022 04:48:34 UTC] PHP Stack trace:
+[25-May-2022 04:48:34 UTC] PHP   1. {main}() /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/index.php:0
+[25-May-2022 04:48:34 UTC] PHP   2. include() /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/index.php:1
+[25-May-2022 04:48:34 UTC] PHP Notice:  Trying to access array offset on value of type bool in /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/dbconnection.php on line 24
+[25-May-2022 04:48:34 UTC] PHP Stack trace:
+[25-May-2022 04:48:34 UTC] PHP   1. {main}() /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/index.php:0
+[25-May-2022 04:48:34 UTC] PHP   2. include() /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/index.php:1
+[25-May-2022 04:48:47 UTC] PHP Notice:  Trying to access array offset on value of type bool in /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/dbconnection.php on line 23
+[25-May-2022 04:48:47 UTC] PHP Stack trace:
+[25-May-2022 04:48:47 UTC] PHP   1. {main}() /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/index.php:0
+[25-May-2022 04:48:47 UTC] PHP   2. include() /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/index.php:1
+[25-May-2022 04:48:48 UTC] PHP Notice:  Trying to access array offset on value of type bool in /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/dbconnection.php on line 23
+[25-May-2022 04:48:48 UTC] PHP Stack trace:
+[25-May-2022 04:48:48 UTC] PHP   1. {main}() /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/index.php:0
+[25-May-2022 04:48:48 UTC] PHP   2. include() /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/index.php:1
+[25-May-2022 04:49:25 UTC] PHP Notice:  Trying to access array offset on value of type bool in /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/dbconnection.php on line 23
+[25-May-2022 04:49:25 UTC] PHP Stack trace:
+[25-May-2022 04:49:25 UTC] PHP   1. {main}() /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/index.php:0
+[25-May-2022 04:49:25 UTC] PHP   2. include() /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/index.php:1
+[25-May-2022 04:49:25 UTC] PHP Notice:  Trying to access array offset on value of type bool in /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/dbconnection.php on line 23
+[25-May-2022 04:49:25 UTC] PHP Stack trace:
+[25-May-2022 04:49:25 UTC] PHP   1. {main}() /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/index.php:0
+[25-May-2022 04:49:25 UTC] PHP   2. include() /Users/alexphomthavong/Local Sites/kopchaijerky/app/public/index.php:1
