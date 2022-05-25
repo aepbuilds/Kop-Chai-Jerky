@@ -80,7 +80,7 @@ $getcart->execute();
       <div class="row">
         <div class="col-md-4 order-md-2 mb-4">
 
-        <form action="https://www.sandbox.paypal.com/us/cgi-bin/webscr" method="post" name="_xclick" class="needs-validation" novalidate>
+        <form action="https://www.sandbox.paypal.com/us/cgi-bin/webscr" method="post" class="needs-validation" target="paypal">
 
           <input type = "hidden" name = "cmd" value = "_ext-enter" />
           <input type = "hidden" name = "redirect_cmd" value = "_xclick" /> 

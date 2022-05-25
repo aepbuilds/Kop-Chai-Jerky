@@ -62,8 +62,7 @@ if($action=='addcart' && $_SERVER['REQUEST_METHOD']=='POST') {
 	$currentQty = $_POST['qty']; //Incrementing the product qty in cart
 	$_SESSION['products'][$_POST['sku']] =array('qty'=>$currentQty,'name'=>$product['name'],'image'=>$product['image'],'price'=>$product['price']);
 	$product='';
-	header('Location: '.$_SERVER['PHP_SELF']);
-  die;
+	header('Location:index.php');
 }
  
  //Get all Products
